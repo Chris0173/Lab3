@@ -1,0 +1,61 @@
+html {
+  font-family: "Open Sans", sans-serif; /* this should be the rest of the output you got from Google Fonts */
+  color:rgb(7, 8, 6)
+}
+
+li {
+  font-size: 22px;
+  line-height: 2;
+  letter-spacing: 1px;
+  color:#286aa8
+}
+
+html {
+  background-color: red;
+}
+
+h2 {
+  font-size:30px;
+  text-align: center;
+  color:#286aa8
+}
+
+body {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px 20px 20px 20px;
+  border: 1px solid rgb(10, 2, 2);
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 100%; height: auto;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image-container img {
+    width: 33.33%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+p {
+    font-size: 22px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
