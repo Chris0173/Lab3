@@ -1,5 +1,6 @@
 // Module 3 JS Fundamentals 
-// Fundamentals 3.1
+
+// JS Fundamentals - Q1
 console.log("" + 1 + 0) // 10 
 console.log("" - 1 + 0) // -1
 console.log(true + false) // 1
@@ -18,7 +19,7 @@ console.log(undefined == null) // true
 console.log(undefined === null) // false
 console.log(" \t \n" - 2) // -2
 
-// Fundamentals 3.2
+// JS Fundamentals - Q2
 let three = "3"
 let four = "4"
 let thirty = "30"
@@ -38,20 +39,20 @@ console.log("subtraction: ", subtraction);
 console.log("lessThan1: ", lessThan1);
 console.log("lessThan2: ", lessThan2);  //////// ASK WHY TRUE!
 
-// Fundamentals 3.3
+// JS Fundamentals - Q3
 if (0) console.log('#1 zero is true') // Will not print - because 0 is a false value 
 if ("0") console.log('#2 zero is true') // Will print - because the "0" is considered a non-empty string
 if (null) console.log('null is true') // will not print - because null is a false value
 if (-1) console.log('negative is true') // will print - because -1 is considered a non-zero number 
 if (1) console.log('positive is true') // will print - because 1 is considered a non-zero number
 
-// Fundamentals 3.4
+// JS Fundamentals - Q4
 let a = 12, b = 45;
 let result = `${a} + ${b} is `;
 result += (a + b < 10) ? 'less than 10' : 'greater than 10'; // += allows you to append to the value and assign it to the corresponding variable
 console.log(result)
 
-// Fundamentals 3.5
+// JS Fundamentals - Q5
 // Function Expression Syntax:
 const getGreeting = function(name){
     return 'Hello ' + name + '!'
@@ -61,7 +62,7 @@ console.log(getGreeting('Chris')); // Works!
 const getGreetingArrow = (name) => 'Hello ' + name + '!';
 console.log(getGreetingArrow('Christopher'))
 
-// Fundamentals 3.6
+// JS Fundamentals - Q6
 const westley = {
     name: 'Westley',
     numFingers: 5
@@ -84,7 +85,7 @@ const inigo = {
 inigo.greeting(westley)
 inigo.greeting(rugen)
 
-// Fundamentals 3.7
+// JS Fundamentals - Q7
 const basketballGame = {
     score: 0,
     fouls: 0,
@@ -116,7 +117,7 @@ const basketballGame = {
 basketballGame.freeThrow().basket().threePointer().foul().halfTime().finalScore();
 // Initially tested with foul() at the end but was recieving syntax error due to finalScore not returning result. 
 
-// Fundamentals 3.8
+// JS Fundamentals - Q8
 const sydney = {
     name: 'Sydney',
     population: 5_121_000,
@@ -145,4 +146,88 @@ function objectProperties(obj) {
 objectProperties(sydney);
 objectProperties(melbourne);
 
-// Fundamentals 3.9
+// JS Fundamentals - Q9
+let teamSports = ['Basketball', 'Football', 'Cricket'];
+let moreSports = [...teamSports];
+
+moreSports.push('Hockey', 'Netball');
+moreSports.unshift('Tennis', 'Golf');
+
+console.log(moreSports);
+
+let dog2 = {
+    name: 'Stan',
+    breed: 'pitbull',
+    age: 5
+};
+
+let dog1 = {...dog2};
+dog2.age = 2;
+
+console.log(dog1);
+console.log(dog2);
+
+let cat2 = {
+    name: 'Misty',
+    breed: 'Cat',
+    age: 12
+};
+
+let cat1 = {...cat2};
+cat1.name = 'Tinkerbell';
+
+console.log(cat1);
+console.log(cat2);
+
+console.log(teamSports);
+console.log(dog1);
+console.log(cat1);          // No changes. This is because we created new variables while updating some values. 
+
+console.log(moreSports);    // Check 9e) Dont understand as they already reamin independant 
+console.log(cat2);
+
+// JS Fundamentals - Q10 
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.human = true;
+
+    this.canDrive = function(){
+        return this.age >= 16;
+    };
+}
+
+let chris = new Person('Chris LaCock', 23);
+let destini = new Person('Destini-ann Feeley', 21);
+
+console.log(chris)
+console.log(destini);
+
+class personClass {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.human = true;
+    }
+
+    canDrive() {
+        return this.age >=16;
+    }
+}
+
+let steven = new personClass('Steven Feeley', 49);
+let nic = new personClass('Nicollette Feeley', 45);
+
+console.log(steven);
+console.log(nic);
+
+console.log(chris.canDrive());
+console.log(destini.canDrive());
+console.log(steven.canDrive());
+console.log(nic.canDrive());
+
+let renae = new personClass('Renae-Grace LaCock', 2);
+let harvey = new personClass('Harvey-Alexander LaCock', 0);
+
+console.log(renae.canDrive());
+console.log(harvey.canDrive());
