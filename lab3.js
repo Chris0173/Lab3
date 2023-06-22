@@ -231,3 +231,96 @@ let harvey = new personClass('Harvey-Alexander LaCock', 0);
 
 console.log(renae.canDrive());
 console.log(harvey.canDrive());
+
+
+// Module 3 JS Intermediate
+// JS Intermediate - Q1
+function capitalizeFirstLetters(str) {
+    let capitalizedString = '';
+    
+    str.split(' ').forEach(word => {
+        capitalizedString += word.charAt(0).toUpperCase() + word.slice(1) + ' ';
+    });
+
+    return capitalizedString.trim();
+}
+
+let sentence = 'i want every word in this sentence to be emphasised';
+let capitalizedSentence = capitalizeFirstLetters(sentence);
+console.log(capitalizedSentence);
+
+// JS Intermediate - Q2
+function truncate(str, max) {
+    if (str.length <= max) {
+        return str;
+    } 
+
+    return str.slice(0, max) + '...';
+}
+
+let text = 'In the begining there was nothing.';
+let truncatedText = truncate(text, 20);
+console.log(truncatedText);
+
+// JS Intermediate - Q3
+const animals = ['Tiger', 'Giraffe']
+animals.push('Elephant', 'Lion', 'Lepard');
+animals.unshift('Rhino', 'Zebra');
+animals.sort();
+console.log(animals);
+
+function replaceMiddleAnimal(newValue) {
+    const middleIndex = Math.floor(animals.length / 2);
+    animals[middleIndex] = newValue;
+}
+
+replaceMiddleAnimal('Monkey');
+console.log(animals);
+/////CURRENTLY WORKING ON 
+function findMatchingAnimals(beginsWith) {
+    return animals.filter(animal =>
+        animal.toLowerCase().indexOf(beginsWith.toLowerCase()) === 0
+        );
+}
+
+console.log(findMatchingAnimals('L'));  // Not working for some reason. Check later!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// JS Intermediate - Q4
+// JS Intermediate - Q5
+// JS Intermediate - Q6
+// JS Intermediate - Q7
+// JS Intermediate - Q8
+// JS Intermediate - Q9
+// JS Intermediate - Q10
