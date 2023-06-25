@@ -263,64 +263,228 @@ let truncatedText = truncate(text, 20);
 console.log(truncatedText);
 
 // JS Intermediate - Q3
+
 const animals = ['Tiger', 'Giraffe']
-animals.push('Elephant', 'Lion', 'Lepard');
-animals.unshift('Rhino', 'Zebra');
+animals.push ('Lion', 'Elephant');
+animals.unshift ('Monkey', 'Rhino');
 animals.sort();
-console.log(animals);
 
 function replaceMiddleAnimal(newValue) {
+  if (animals.length % 2 === 0) {
+    const middleIndex = animals.length / 2 - 1;
+    animals.splice(middleIndex, 1, newValue);
+  } else {
     const middleIndex = Math.floor(animals.length / 2);
-    animals[middleIndex] = newValue;
+    animals.splice(middleIndex, 1, newValue);
+  }
 }
 
-replaceMiddleAnimal('Monkey');
-console.log(animals);
-/////CURRENTLY WORKING ON 
+replaceMiddleAnimal('Leopard');
+
 function findMatchingAnimals(beginsWith) {
-    return animals.filter(animal =>
-        animal.toLowerCase().indexOf(beginsWith.toLowerCase()) === 0
-        );
+  const lowerCaseBeginsWith = beginsWith.toLowerCase();
+  return animals.filter(animal => animal.toLowerCase().startsWith(lowerCaseBeginsWith));
 }
 
-console.log(findMatchingAnimals('L'));  // Not working for some reason. Check later!
+const matchingAnimals = findMatchingAnimals('L');
 
+console.log(animals);
+console.log(matchingAnimals);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////FIX Issue - Not Returning Both Lion & Leopard///////////////////////////////
 
 // JS Intermediate - Q4
-// JS Intermediate - Q5
+
+function camelCase(cssProp) {
+    var words = cssProp.split('-');
+    var camelCaseProp = words[0];
+    for (var i = 1; i < words.length; i++) {
+      camelCaseProp += words[i][0].toUpperCase() + words[i].substring(1);
+    }
+    return camelCaseProp;
+  }
+  
+//for loop
+function camelCase(cssProp) {
+    var words = cssProp.split('-');
+    var camelCaseProp = words[0];
+    for (var i = 1; i < words.length; i++) {
+      camelCaseProp += words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+    return camelCaseProp;
+  }
+
+  //without conditional operator
+  function camelCase(cssProp) {
+    var words = cssProp.split('-');
+    var camelCaseProp = words[0];
+    for (var i = 1; i < words.length; i++) {
+      camelCaseProp += words[i][0].toUpperCase() + words[i].substring(1);
+    }
+    return camelCaseProp;
+  }
+  
+  console.log(camelCase('margin-left')) // marginLeft
+  console.log(camelCase('background-image')) // backgroundImage
+  console.log(camelCase('display')) // display
+  
+  // JS Intermediate - Q5
+
+let twentyCents = 0.20
+let tenCents = 0.10
+console.log(`${twentyCents} + ${tenCents} = ${twentyCents + tenCents}`) 
+
+let fixedTwenty = twentyCents.toFixed(2);
+let fixedTen = tenCents.toFixed(2);
+
+console.log(fixedTwenty + fixedTen);  // It returns a incorrect result as when using .toFixed, it returns the results as a string rather than a number.
+
+function currencyAddition(float1, float2) {
+    const result = (float1 * 100 + float2 * 100) / 100;
+    return result;
+}
+
+let float1 = 0.20;
+let float2 = 0.10;
+
+let sum = currencyAddition(float1, float2);
+console.log(sum);
+
+function currencyOperation(float1, float2, operation, numDecimals) {
+    const multiplier = 10 ** numDecimals;
+    let result;
+
+    switch (operation) {
+        case '+':
+            result = (float1 * 100 + float2 * 100) / 100;
+            break;
+        case '-':
+            result = (float1 * 100 - float2 * 100) / 100;
+            break;
+        case '*':
+            result = (float1 * 100 * float2) / 100;
+            break;
+        case '/':
+            result = (float1 * 100) / (float2 * 100);
+            break;
+        default:
+            throw new Error('Invalid operation: ' + operation);
+    }
+
+    return parseFloat(result);
+}
+
+console.log(0.3 == currencyAddition(0.1, 0.2));
+console.log(0.3 == currencyOperation(0.1, 0.2, '+'));
+
 // JS Intermediate - Q6
+
+function unique(duplicatesArray) {
+    var uniqueArray = [];
+    for (var i = 0; i < duplicatesArray.length; i++) {
+        var value = duplicatesArray[i];
+        if (!uniqueArray.includes(value)) {
+            uniqueArray.push(value);
+        }
+    }
+    return uniqueArray;
+}
+
+const colours = ['red', 'green', 'blue', 'yellow', 'orange', 'red', 'blue', 'yellow']
+const testScores = [55, 84, 97, 63, 55, 32, 84, 91, 55, 43]
+
+const totalVotes = [13, 15, 46, 51, 22, 22, 13, 23]
+const pets = ['dogs', 'cats', 'birds', 'fish', 'bunnies', 'cats', 'fish']
+
+console.log(unique(colours));
+console.log(unique(testScores));
+
+console.log(unique(totalVotes));
+console.log(unique(pets));
+
 // JS Intermediate - Q7
+
+const books = [
+    { id: 1, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', year: 1925 },
+    { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960 },
+    { id: 3, title: '1984', author: 'George Orwell', year: 1949 },
+    { id: 4, title: 'Brave New World', author: 'Aldous Huxley', year: 1932 },
+    { id: 5, title: 'The Catcher in the Rye', author: 'J.D. Salinger', year: 1951 },
+  ];
+  
+  function getBookTitle(bookId) {
+    const book = books.find(book => book.id === bookId);
+    if (book) {
+      return book.title;
+    } else {
+      return 'Book not found';
+    }
+  }
+  
+  console.log(getBookTitle(3));
+  
+  function getOldBooks() {
+    const oldBooks = books.filter(book => book.year < 1950);
+    return oldBooks;
+  }
+
+  console.log(getOldBooks());
+
+function addGenre() {
+    const booksWithGenre = books.map(book => {
+        return { ...book, genre: 'classic'};
+    });
+    return booksWithGenre;
+}
+
+console.log(addGenre());
+
+function getTitles(authorInitial) {
+    const titles = books
+        .filter(book => book.author.startsWith(authorInitial))
+        .map(book => book.title);
+    return titles;
+}
+
+console.log(getTitles('F'));
+
+function latestBook() {
+    let latest = null;
+  
+    books.forEach(book => {
+      if (!latest || book.year > latest.year) {
+        latest = book;
+      }
+    });
+  
+    return latest;
+  }
+  
+  console.log(latestBook());
+
 // JS Intermediate - Q8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // JS Intermediate - Q9
 // JS Intermediate - Q10
