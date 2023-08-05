@@ -562,3 +562,165 @@ const date1 = new Date('2023-06-29');
 const date2 = new Date('2021-06-21');
 const diff = daysInBetween(date1, date2);
 console.log('Number of days in between:', diff);
+
+// Module 3 JS Advanced
+// JS Advanced - Q1
+
+function makeCounter(startFrom, incrementBy) {
+    let currentCount = startFrom || 0;
+    incrementBy = incrementBy || 1;
+
+    return function() {
+        currentCount += incrementBy;
+        console.log(currentCount);
+        return currentCount;
+    };
+}
+
+let counter1 = makeCounter(6, 21); 
+let counter2 = makeCounter(2, 23); 
+
+counter1(); //27
+counter2(); //25
+counter1(); //48
+counter2(); //48
+
+// JS Advanced - Q2
+
+const delayMsg = (msg) => {
+    console.log(`This message will be printed after a delay: ${msg}`);
+};
+
+const timeoutId1 = setTimeout(delayMsg, 100, '#1: Delayed by 100ms');
+const timeoutId2 = setTimeout(delayMsg, 20, '#2: Delayed by 20ms');
+const timeoutId3 = setTimeout(delayMsg, 0, '#3: Delayed by 0ms');
+const timeoutId5 = setTimeout(delayMsg, 11000, '#5: Delayed by 11 seconds');
+
+delayMsg('#4: Not delayed at all');
+
+clearTimeout(timeoutId5);
+
+// #4 - 'Not delayed at all' will be printed as it is a regular function call and not using a setTimeout
+// #3 - Javascript treats this as a minimum delay (will be executed after any currently executing script)
+// #2 - Delay of 20ms
+// #1 - Delay of 100ms
+// #5 - Delay of 11s
+
+// JS Advanced - Q3
+
+function debounce(func, ms) {
+    let timeoutId;
+
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, ms);
+    };
+}
+
+function printMe(msg) {
+    console.log(`printing debounced message: ${msg}`);
+}
+
+const debounceDuration = 1000;
+const debouncedPrintMe = debounce(printMe, debounceDuration);
+
+setTimeout(() => debouncedPrintMe('First message'), 100);
+setTimeout(() => debouncedPrintMe('Second message'), 200);
+setTimeout(() => debouncedPrintMe('Third message'), 300);
+
+// JS Advanced - Q4 
+/*
+function* fibonacciGenerator(limit) {
+    let prev = 0;
+    let curr = 1;
+    let count = 0;
+    
+    while (count < limit) {
+      yield curr;
+      [prev, curr] = [curr, prev + curr];
+      count++;
+    }
+  }
+  
+  function printFibonacci(limit) {
+    const fibonacciGen = fibonacciGenerator(limit);
+    const intervalId = setInterval(() => {
+      const nextNumber = fibonacciGen.next();
+      if (nextNumber.done) {
+        clearInterval(intervalId);
+      } else {
+        console.log(nextNumber.value);
+      }
+    }, 1000);
+  }
+  
+  // Limit of 10
+  printFibonacci(10);
+  
+
+  // New Version 
+
+function printFibonacciTimeouts() {
+    let prev = 0;
+    let curr = 1;
+    
+    const printNextFibonacci = () => {
+      console.log(curr);
+      [prev, curr] = [curr, prev + curr];
+      setTimeout(printNextFibonacci, 1000);
+    };
+  
+    setTimeout(printNextFibonacci, 1000);
+  }
+  
+  printFibonacciTimeouts(); */
+  
+// JS Advanced - Q5
+
+  let car = {
+    make: "Porsche",
+    model: '911',
+    year: 1964,
+    description() {
+      console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
+    }
+  };
+  
+  car.description();
+  
+  let updatedCar = { ...car, year: 2022, make: "Ferrari" };
+  updatedCar.description();
+
+  setTimeout(car.description.bind(car), 2000)
+
+  // It will use the original values, - it references properties directly from the object where it was defined. 
+
+// JS Advanced - Q6
+
+ Function.prototype.delay = function (ms) {
+    const originalFunction = this;
+    return function (...args) {
+      setTimeout(() => {
+        originalFunction.apply(this, args);
+      }, ms);
+    };
+  };
+  
+  function multiply(a, b, c, d) {
+    console.log(a * b * c * d);
+  }
+  
+  multiply.delay(500)(1, 2, 3, 4); 
+  multiply.delay(1000)(2, 3, 4, 5); 
+  multiply.delay(1500)(5, 5, 5, 5); 
+
+// JS Advanced - Q7
+
+
+  
+  
+  
+  
+  
