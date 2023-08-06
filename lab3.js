@@ -1,5 +1,5 @@
 // Module 3 JS Fundamentals 
-
+/*
 // JS Fundamentals - Q1
 console.log("" + 1 + 0) // 10 
 console.log("" - 1 + 0) // -1
@@ -562,7 +562,7 @@ const date1 = new Date('2023-06-29');
 const date2 = new Date('2021-06-21');
 const diff = daysInBetween(date1, date2);
 console.log('Number of days in between:', diff);
-
+*/
 // Module 3 JS Advanced
 // JS Advanced - Q1
 
@@ -631,7 +631,7 @@ setTimeout(() => debouncedPrintMe('Second message'), 200);
 setTimeout(() => debouncedPrintMe('Third message'), 300);
 
 // JS Advanced - Q4 
-/*
+
 function* fibonacciGenerator(limit) {
     let prev = 0;
     let curr = 1;
@@ -675,7 +675,7 @@ function printFibonacciTimeouts() {
     setTimeout(printNextFibonacci, 1000);
   }
   
-  printFibonacciTimeouts(); */
+  printFibonacciTimeouts(); 
   
 // JS Advanced - Q5
 
@@ -718,9 +718,165 @@ function printFibonacciTimeouts() {
 
 // JS Advanced - Q7
 
+function Person(name, age, gender) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+  }
+  
+  Person.prototype.toString = function () {
+    return `Name: ${this.name}, Age: ${this.age}, Gender: ${this.gender}`;
+  };
+  
+  function Student(name, age, gender, cohort) {
+    Person.call(this, name, age, gender);
+    this.cohort = cohort;
+  }
+  
+  Student.prototype = Object.create(Person.prototype);
+  
+  Student.prototype.toString = function () {
+    return `${Person.prototype.toString.call(this)}, Cohort: ${this.cohort}`;
+  };
+  
+  const student1 = new Student('John Doe', 20, 'male', '2023');
+  const student2 = new Student('Jane Smith', 22, 'female', '2022');
+  
+  console.log(student1.toString());
+  console.log(student2.toString());
+  
+// JS Advanced - Q8
 
+class DigitalClock {
+    constructor(prefix) {
+      this.prefix = prefix;
+    }
   
+    display() {
+      let date = new Date();
+      let [hours, mins, secs] = [
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+      ];
+      if (hours < 10) hours = '0' + hours;
+      if (mins < 10) mins = '0' + mins;
+      if (secs < 10) secs = '0' + secs;
+      console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+    }
   
+    stop() {
+      clearInterval(this.timer);
+    }
   
+    start() {
+      this.display();
+      this.timer = setInterval(() => this.display(), 1000);
+    }
+  }
+  
+  class PrecisionClock extends DigitalClock {
+    constructor(prefix, precision = 1000) {
+      super(prefix);
+      this.precision = precision;
+    }
+  
+    start() {
+      this.display();
+      this.timer = setInterval(() => this.display(), this.precision);
+    }
+  }
+  
+  const myClock = new PrecisionClock('my clock:', 500);
+  myClock.start();
+  
+  class AlarmClock extends DigitalClock {
+    constructor(prefix, wakeupTime = '07:00') {
+      super(prefix);
+      this.wakeupTime = wakeupTime;
+    }
+  
+    start() {
+      this.display();
+      const targetTime = new Date();
+      const [targetHours, targetMins] = this.wakeupTime.split(':');
+      targetTime.setHours(parseInt(targetHours));
+      targetTime.setMinutes(parseInt(targetMins));
+  
+      this.timer = setInterval(() => {
+        const currentTime = new Date();
+        if (currentTime >= targetTime) {
+          console.log('Wake Up');
+          this.stop();
+        }
+        this.display();
+      }, 1000);
+    }
+  }
+  
+  const myAlarmClock = new AlarmClock('Alarm:', '19:37'); 
+  myAlarmClock.start(); 
+  
+// JS Advanced - Q9
+
+let delayTime; 
+
+function getRandomDelay(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomDelay() {
+  return new Promise((resolve, reject) => {
+    delayTime = getRandomDelay(1000, 20000); 
+    setTimeout(() => {
+      if (delayTime % 2 === 0) {
+        resolve();
+      } else {
+        reject('Odd number.');
+      }
+    }, delayTime);
+  });
+}
+
+randomDelay()
+  .then(() => console.log(`There appears to have been a successful delay of ${delayTime} milliseconds.`))
+  .catch((error) => console.error(`Delay of ${delayTime} milliseconds failed: ${error}`));
+
+// JS Advanced - Q10
+
+import fetch from 'node-fetch';
+
+async function fetchURLData(url) {
+  try {
+    const response = await fetch(url);
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function fetchAllURLData(urls) {
+  try {
+    const promises = urls.map((url) => fetchURLData(url));
+    return await Promise.all(promises);
+  } catch (error) {
+    throw error;
+  }
+}
+
+const urls = [
+  'https://jsonplaceholder.typicode.com/todos/1',
+  'https://jsonplaceholder.typicode.com/todos/2',
+  'https://jsonplaceholder.typicode.com/todos/3',
+];
+
+fetchAllURLData(urls)
+  .then((data) => console.log('Fetch All URL Data:', data))
+  .catch((error) => console.error('Fetch All URL Data:', error.message));
+
   
   
